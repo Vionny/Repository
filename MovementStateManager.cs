@@ -27,16 +27,17 @@ public class MovementStateManager : MonoBehaviour
     
     void DirectionandMove()
     {
+        /*
         jump = Input.GetButtonDown("Jump");
         animation.SetBool("Jump", false);
-        /*if (jump)
+        if (jump==true)
         {
             rbPlayer.AddForce(new Vector3(0, 5, 0), ForceMode.Impulse);
             animation.SetBool("Jump", true);
-            transform.Translate(new Vector3(0,0, 0));
-            transform.Translate(new Vector3(0, 1, 0));
+           // transform.Translate(new Vector3(0,0, 0));
+           // transform.Translate(new Vector3(0, 1, 0));
            // transform.Translate(new Vector3(0, 1.5, 0));
-            transform.Translate(new Vector3(0, 2, 0));
+           // transform.Translate(new Vector3(0, 2, 0));
         }*/
         hInput = Input.GetAxis("Horizontal");
         vInput = Input.GetAxis("Vertical");
@@ -72,13 +73,20 @@ public class MovementStateManager : MonoBehaviour
     void Update()
     {
         DirectionandMove();
-        //Debug.Log(Input.GetButtonDown("Jump"));
-        //if (Input.GetButtonDown("Jump"))
-        //{
-        //    transform.Translate(new Vector3(0, 5, 0));
-        ///}
+        //Debug.Log(Input.GetKeyDown(KeyCode.Space));
+        if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
+        {
+            velocity.y = Mathf.Sqrt(3 * -2 * gravity);
+            animation.SetBool("Jump", true);
+           // rbPlayer.AddForce(new Vector3(0, 5, 0), ForceMode.Impulse);
+        }else if(!(IsGrounded() && Input.GetKeyDown(KeyCode.Space)))
+        {
+            animation.SetBool("Jump", false);
+            Gravity();
+        }
 
-        Gravity();
+        
+
         //GetPos(hInput, vInput);
     }
 }

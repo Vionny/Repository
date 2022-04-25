@@ -4,6 +4,6 @@ using UnityEngine;
 
 public abstract class AimBaseState
 {
-    public abstract void Enter(AimStateManager aim);
-    public abstract void Update(AimStateManager aim);
+    public abstract void EnterState(AimStateManager aim);
+    public abstract void UpdateState(AimStateManager aim);
 }
